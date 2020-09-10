@@ -16,12 +16,15 @@ router.post(
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      return res.status(400).send(errors.array());
+      //return res.status(400).send(errors.array());
+      throw new Error("Invaid email or password");
     }
 
     const { email, password } = req.body;
 
     console.log("Creating a user now");
+    throw new Error("Error connecting to DB");
+
     res.send({});
   }
 );
