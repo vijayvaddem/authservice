@@ -7,8 +7,14 @@ interface UserAttr {
 }
 
 //interface which describsed User model
-interface UserModel extends mongoose.Model<any> {
-  build(attrs: UserAttr): any;
+interface UserModel extends mongoose.Model<UserDoc> {
+  build(attrs: UserAttr): UserDoc;
+}
+
+//single user doc interface
+interface UserDoc extends mongoose.Document {
+  email: string;
+  password: string;
 }
 
 //define schema for user
@@ -28,7 +34,7 @@ userSchema.statics.build = (attr: UserAttr) => {
 };
 
 //create model in MongoDB
-const User = mongoose.model<any, UserModel>("User", userSchema);
+const User = mongoose.model<UserDoc, UserModel>("User", userSchema);
 
 User.build({
   email: "v@v.com",
